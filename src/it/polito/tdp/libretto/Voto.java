@@ -9,7 +9,6 @@ public class Voto {
 	private LocalDate data;
 	
 	public Voto(int voto, String corso, LocalDate data) {
-		super();
 		this.voto = voto;
 		this.corso = corso;
 		this.data = data;
@@ -31,6 +30,11 @@ public class Voto {
 	}
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+	
+	@Override
+	public String toString() {
+		return "Voto [voto=" + voto + ", corso=" + corso + ", data=" + data + "]";
 	}
 	
 	
