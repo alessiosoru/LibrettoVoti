@@ -37,6 +37,29 @@ public class Voto {
 		return "Voto [voto=" + punti + ", corso=" + corso + ", data=" + data + "]";
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Voto other = (Voto) obj;
+		if (corso == null) {
+			if (other.corso != null) {
+				return false;
+			}
+		} else if (!corso.equals(other.corso)) {
+			return false;
+		}
+		return true;
+	}
 	
-
 }
