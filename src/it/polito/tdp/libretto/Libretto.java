@@ -51,15 +51,24 @@ public class Libretto {
 	 * Ricerca un voto relativo al corso di cui è specificato il nome
 	 * 
 	 * @param nomeEsame nome del corso da ricercare
-	 * @return il {@link Voto} corrispondente a quanto cercato
+	 * @return il {@link Voto} corrispondente, oppure {@code null} se non esistente
 	 */
 	public Voto cercaEsame(String nomeEsame) {
-		for(Voto v:this.voti) {
-			if(v.getCorso().equals(nomeEsame)) {
-				return v;
-			}
-		}
-		return null;
+		
+		Voto voto = new Voto(0, nomeEsame, null); // è un oggetto incompleto ma mi serve
+		// solo per poterlo confrontare come oggetto Voto
+		int pos = this.voti.indexOf(voto);
+		if(pos==-1)
+			return null;
+		else
+			return this.voti.get(pos);
+		// ho usato strutture a più alto livello anzichè cicli for annidati
+//		for(Voto v:this.voti) {
+//			if(v.getCorso().equals(nomeEsame)) {
+//				return v;
+//			}
+//		}
+//		return null;
 	}
 	
 
@@ -68,17 +77,29 @@ public class Libretto {
 	 * 
 	 * @param v
 	 * @return {@code true}, se ha trovato un corso e punteggio uguali,
-	 * 			{@code false} se non ha torvato ul corso, oppure l'ha trovato con voto diverso
+	 * 			{@code false} se non ha torvato il corso, oppure l'ha trovato con voto diverso
 	 */
 	public boolean esisteGiaVoto(Voto v) {
-		Voto trovato =  this.cercaEsame(v.getCorso());
-		if(trovato==null)
+		int pos = this.voti.indexOf(v);
+		if(pos==-1)
 			return false;
-		if(trovato.getPunti()==v.getPunti()) {
-			return true;
-		} else {
-			return false;
-		}
+		else
+			return v.getPunti() == this.voti.get(pos).getPunti(); // ritorna direttamente vero se uguaglianza vera, falso altimenti
+//		else {
+//			if(v.getPunti() == this.voti.get(pos).getPunti())
+//				return true;
+//			else
+//				return false;
+//		}
+		// ho usato strutture a più alto livello anzichè cicli annidati
+//		Voto trovato =  this.cercaEsame(v.getCorso());
+//		if(trovato==null)
+//			return false;
+//		if(trovato.getPunti()==v.getPunti()) {
+//			return true;
+//		} else {
+//			return false;
+//		}
 	}
 
 }
